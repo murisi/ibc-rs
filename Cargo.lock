@@ -1342,7 +1342,7 @@ dependencies = [
  "ibc-proto",
  "ics23",
  "modelator",
- "prost 0.8.0",
+ "prost",
  "prost-types",
  "regex",
  "serde",
@@ -1366,7 +1366,7 @@ version = "0.8.2"
 dependencies = [
  "anomaly",
  "bytes",
- "prost 0.8.0",
+ "prost",
  "prost-types",
  "tendermint-proto",
  "thiserror",
@@ -1396,9 +1396,9 @@ dependencies = [
  "ibc",
  "ibc-proto",
  "ibc-telemetry",
- "itertools 0.10.1",
+ "itertools",
  "k256",
- "prost 0.8.0",
+ "prost",
  "prost-types",
  "retry",
  "ripemd160",
@@ -1442,9 +1442,9 @@ dependencies = [
  "ibc-proto",
  "ibc-relayer",
  "ibc-telemetry",
- "itertools 0.10.1",
+ "itertools",
  "once_cell",
- "prost 0.8.0",
+ "prost",
  "prost-types",
  "regex",
  "serde",
@@ -1480,16 +1480,16 @@ dependencies = [
 [[package]]
 name = "ics23"
 version = "0.6.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a575acddcafc39b28ccc3c685a0029b58e4741af99cd6c9fa11406ad4c4085d6"
+source = "git+https://github.com/heliaxdev/ics23?branch=tomas/update-prost#493dd786046d8ca0edfbfca5ac73586e5b87d901"
 dependencies = [
  "anyhow",
  "bytes",
  "hex",
- "prost 0.7.0",
+ "prost",
  "ripemd160",
  "sha2",
  "sha3",
+ "sp-std",
 ]
 
 [[package]]
@@ -1535,15 +1535,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bee0328b1209d157ef001c94dd85b4f8f64139adb0eac2659f4b08382b2f474d"
 dependencies = [
  "cfg-if 1.0.0",
-]
-
-[[package]]
-name = "itertools"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "284f18f85651fe11e8a991b2adb42cb078325c996ed026d994719efcfca1d54b"
-dependencies = [
- "either",
 ]
 
 [[package]]
@@ -2136,35 +2127,12 @@ dependencies = [
 
 [[package]]
 name = "prost"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e6984d2f1a23009bd270b8bb56d0926810a3d483f59c987d77969e9d8e840b2"
-dependencies = [
- "bytes",
- "prost-derive 0.7.0",
-]
-
-[[package]]
-name = "prost"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de5e2533f59d08fcf364fd374ebda0692a70bd6d7e66ef97f306f45c6c5d8020"
 dependencies = [
  "bytes",
- "prost-derive 0.8.0",
-]
-
-[[package]]
-name = "prost-derive"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "169a15f3008ecb5160cba7d37bcd690a7601b6d30cfb87a117d45e59d52af5d4"
-dependencies = [
- "anyhow",
- "itertools 0.9.0",
- "proc-macro2",
- "quote",
- "syn",
+ "prost-derive",
 ]
 
 [[package]]
@@ -2174,7 +2142,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "600d2f334aa05acb02a755e217ef1ab6dea4d51b58b7846588b747edec04efba"
 dependencies = [
  "anyhow",
- "itertools 0.10.1",
+ "itertools",
  "proc-macro2",
  "quote",
  "syn",
@@ -2187,7 +2155,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "603bbd6394701d13f3f25aada59c7de9d35a6a5887cfc156181234a44002771b"
 dependencies = [
  "bytes",
- "prost 0.8.0",
+ "prost",
 ]
 
 [[package]]
@@ -2832,6 +2800,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "sp-std"
+version = "3.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "35391ea974fa5ee869cb094d5b437688fbf3d8127d64d1b9fed5822a1ed39b12"
+
+[[package]]
 name = "spin"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3000,7 +2974,7 @@ dependencies = [
  "futures",
  "num-traits",
  "once_cell",
- "prost 0.8.0",
+ "prost",
  "prost-types",
  "serde",
  "serde_bytes",
@@ -3048,7 +3022,7 @@ dependencies = [
  "chrono",
  "num-derive",
  "num-traits",
- "prost 0.8.0",
+ "prost",
  "prost-types",
  "serde",
  "serde_bytes",
@@ -3377,8 +3351,8 @@ dependencies = [
  "hyper-timeout",
  "percent-encoding",
  "pin-project",
- "prost 0.8.0",
- "prost-derive 0.8.0",
+ "prost",
+ "prost-derive",
  "rustls-native-certs",
  "tokio",
  "tokio-rustls",
