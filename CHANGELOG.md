@@ -6,7 +6,9 @@
 
 - [ibc]
   - Enable `pub` access to verification methods of ICS 03 & 04 ([#1198])
-  
+  - Add `ics26_routing::handler::decode` function ([#1194])
+  - Add a pseudo root to `MockConsensusState` ([#1215])
+
 - [ibc-relayer-cli]
   - Added `upgrade-clients` CLI ([#763])
 
