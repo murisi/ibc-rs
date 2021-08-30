@@ -8,6 +8,10 @@ use ibc_proto::ibc::core::connection::v1::Version as RawVersion;
 use crate::ics03_connection::error::Kind;
 
 /// Stores the identifier and the features supported by a version
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Version {
     /// unique version identifier
