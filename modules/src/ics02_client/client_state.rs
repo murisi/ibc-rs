@@ -1,5 +1,7 @@
 use core::marker::{Send, Sync};
 use std::convert::{TryFrom, TryInto};
+#[cfg(feature = "borsh")]
+use std::io::{ErrorKind, Write};
 use std::time::Duration;
 
 use prost_types::Any;
@@ -7,6 +9,8 @@ use serde::{Deserialize, Serialize};
 use tendermint::trust_threshold::TrustThresholdFraction;
 use tendermint_proto::Protobuf;
 
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use ibc_proto::ibc::core::client::v1::IdentifiedClientState;
 
 use crate::ics02_client::client_type::ClientType;
@@ -93,6 +97,28 @@ impl AnyClientState {
             #[cfg(any(test, feature = "mocks"))]
             AnyClientState::Mock(mock_state) => mock_state.expired(elapsed_since_latest),
         }
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for AnyClientState {
+    fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
+        let vec = self
+            .encode_vec()
+            .expect("AnyClientState encoding shouldn't fail");
+        writer.write_all(&vec)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for AnyClientState {
+    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
+        AnyClientState::decode_vec(buf).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyClientState: {}", e),
+            )
+        })
     }
 }
 

@@ -1,5 +1,9 @@
 use std::convert::TryFrom;
+#[cfg(feature = "borsh")]
+use std::io::{ErrorKind, Write};
 
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use prost_types::Any;
 use serde_derive::{Deserialize, Serialize};
 use tendermint_proto::Protobuf;
@@ -57,6 +61,28 @@ impl Header for AnyHeader {
 
     fn wrap_any(self) -> AnyHeader {
         self
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for AnyHeader {
+    fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
+        let vec = self
+            .encode_vec()
+            .expect("AnyHeader encoding shouldn't fail");
+        writer.write_all(&vec)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for AnyHeader {
+    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
+        AnyHeader::decode_vec(buf).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyHeader: {}", e),
+            )
+        })
     }
 }
 

@@ -1,6 +1,10 @@
 use core::marker::{Send, Sync};
 use std::convert::{TryFrom, TryInto};
+#[cfg(feature = "borsh")]
+use std::io::{ErrorKind, Write};
 
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use chrono::{DateTime, Utc};
 use prost_types::Any;
 use serde::Serialize;
@@ -70,6 +74,28 @@ impl AnyConsensusState {
             #[cfg(any(test, feature = "mocks"))]
             AnyConsensusState::Mock(_cs) => ClientType::Mock,
         }
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for AnyConsensusState {
+    fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
+        let vec = self
+            .encode_vec()
+            .expect("AnyConsensusState encoding shouldn't fail");
+        writer.write_all(&vec)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for AnyConsensusState {
+    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
+        AnyConsensusState::decode_vec(buf).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyConsensusState: {}", e),
+            )
+        })
     }
 }
 

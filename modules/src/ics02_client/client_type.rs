@@ -5,6 +5,10 @@ use serde_derive::{Deserialize, Serialize};
 use super::error;
 
 /// Type of the client, depending on the specific consensus algorithm.
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
 pub enum ClientType {
     Tendermint = 1,
