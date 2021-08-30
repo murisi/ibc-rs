@@ -277,6 +277,10 @@ impl ChannelEnd {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Counterparty {
     pub port_id: PortId,
@@ -345,6 +349,10 @@ impl From<Counterparty> for RawCounterparty {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Deserialize, Serialize)]
 pub enum Order {
     None = 0,

@@ -1,7 +1,12 @@
 use std::convert::{TryFrom, TryInto};
+#[cfg(feature = "borsh")]
+use std::io::{ErrorKind, Write};
 use std::str::FromStr;
 
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use serde_derive::{Deserialize, Serialize};
+use tendermint_proto::Protobuf;
 
 use ibc_proto::ibc::core::channel::v1::Packet as RawPacket;
 
@@ -52,6 +57,10 @@ impl std::fmt::Display for PacketMsgType {
 }
 
 /// The sequence number of a packet enforces ordering among packets from the same source.
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Deserialize, Serialize, PartialOrd, Ord)]
 pub struct Sequence(u64);
 
@@ -161,6 +170,28 @@ impl Default for Packet {
         }
     }
 }
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for Packet {
+    fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
+        let vec = self.encode_vec().expect("Packet encoding shouldn't fail");
+        writer.write_all(&vec)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for Packet {
+    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
+        Packet::decode_vec(buf).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding Packet: {}", e),
+            )
+        })
+    }
+}
+
+impl Protobuf<RawPacket> for Packet {}
 
 impl TryFrom<RawPacket> for Packet {
     type Error = anomaly::Error<Kind>;
