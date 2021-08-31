@@ -77,12 +77,14 @@ impl BorshSerialize for AnyHeader {
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for AnyHeader {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        AnyHeader::decode_vec(buf).map_err(|e| {
+        let result = AnyHeader::decode_vec(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
                 format!("Error decoding AnyHeader: {}", e),
             )
-        })
+        });
+        *buf = &[];
+        result
     }
 }
 

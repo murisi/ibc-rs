@@ -119,12 +119,14 @@ impl BorshSerialize for ConnectionEnd {
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for ConnectionEnd {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        ConnectionEnd::decode_vec(buf).map_err(|e| {
+        let result = ConnectionEnd::decode_vec(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
                 format!("Error decoding ConnectionEnd: {}", e),
             )
-        })
+        });
+        *buf = &[];
+        result
     }
 }
 

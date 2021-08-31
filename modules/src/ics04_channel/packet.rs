@@ -182,12 +182,14 @@ impl BorshSerialize for Packet {
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for Packet {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        Packet::decode_vec(buf).map_err(|e| {
+        let result = Packet::decode_vec(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
                 format!("Error decoding Packet: {}", e),
             )
-        })
+        });
+        *buf = &[];
+        result
     }
 }
 

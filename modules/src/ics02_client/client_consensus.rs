@@ -90,12 +90,14 @@ impl BorshSerialize for AnyConsensusState {
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for AnyConsensusState {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        AnyConsensusState::decode_vec(buf).map_err(|e| {
+        let result = AnyConsensusState::decode_vec(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
                 format!("Error decoding AnyConsensusState: {}", e),
             )
-        })
+        });
+        *buf = &[];
+        result
     }
 }
 

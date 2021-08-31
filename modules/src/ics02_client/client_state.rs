@@ -113,12 +113,14 @@ impl BorshSerialize for AnyClientState {
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for AnyClientState {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        AnyClientState::decode_vec(buf).map_err(|e| {
+        let result = AnyClientState::decode_vec(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
                 format!("Error decoding AnyClientState: {}", e),
             )
-        })
+        });
+        *buf = &[];
+        result
     }
 }
 
@@ -247,6 +249,8 @@ mod tests {
     use std::convert::TryFrom;
     use test_env_log::test;
 
+    #[cfg(feature = "borsh")]
+    use borsh::{BorshDeserialize, BorshSerialize};
     use prost_types::Any;
 
     use crate::ics02_client::client_state::AnyClientState;
@@ -260,5 +264,14 @@ mod tests {
         let raw: Any = tm_client_state.clone().into();
         let tm_client_state_back = AnyClientState::try_from(raw).unwrap();
         assert_eq!(tm_client_state, tm_client_state_back);
+    }
+
+    #[cfg(feature = "borsh")]
+    #[test]
+    fn any_client_state_borsh() {
+        let tm_client_state = get_dummy_tendermint_client_state(get_dummy_tendermint_header());
+        let bytes = tm_client_state.try_to_vec().unwrap();
+        let decoded = AnyClientState::try_from_slice(&bytes[..]).unwrap();
+        assert_eq!(tm_client_state, decoded);
     }
 }
