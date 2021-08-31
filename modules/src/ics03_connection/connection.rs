@@ -1,9 +1,13 @@
 use std::convert::{TryFrom, TryInto};
+#[cfg(feature = "borsh")]
+use std::io::{ErrorKind, Write};
 use std::str::FromStr;
 use std::time::Duration;
 use std::u64;
 
 use anomaly::fail;
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use serde::{Deserialize, Serialize};
 use tendermint_proto::Protobuf;
 
@@ -99,6 +103,28 @@ impl Default for ConnectionEnd {
             versions: vec![],
             delay_period: ZERO_DURATION,
         }
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for ConnectionEnd {
+    fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
+        let vec = self
+            .encode_vec()
+            .expect("ConnectionEnd encoding shouldn't fail");
+        writer.write_all(&vec)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for ConnectionEnd {
+    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
+        ConnectionEnd::decode_vec(buf).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding ConnectionEnd: {}", e),
+            )
+        })
     }
 }
 
@@ -334,6 +360,10 @@ impl Counterparty {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum State {
     Uninitialized = 0,

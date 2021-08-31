@@ -1,15 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use std::fmt;
-#[cfg(feature = "borsh")]
-use std::io::{ErrorKind, Write};
 use std::str::FromStr;
 
 use anomaly::fail;
 use serde::{Deserialize, Serialize};
 use tendermint_proto::Protobuf;
 
-#[cfg(feature = "borsh")]
-use borsh::{BorshDeserialize, BorshSerialize};
 use ibc_proto::ibc::core::channel::v1::{
     Channel as RawChannel, Counterparty as RawCounterparty,
     IdentifiedChannel as RawIdentifiedChannel,
@@ -84,6 +80,10 @@ impl From<IdentifiedChannelEnd> for RawIdentifiedChannel {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ChannelEnd {
     pub state: State,
@@ -102,28 +102,6 @@ impl Default for ChannelEnd {
             connection_hops: vec![],
             version: "".to_string(),
         }
-    }
-}
-
-#[cfg(feature = "borsh")]
-impl BorshSerialize for ChannelEnd {
-    fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
-        let vec = self
-            .encode_vec()
-            .expect("ChannelEnd encoding shouldn't fail");
-        writer.write_all(&vec)
-    }
-}
-
-#[cfg(feature = "borsh")]
-impl BorshDeserialize for ChannelEnd {
-    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        ChannelEnd::decode_vec(buf).map_err(|e| {
-            std::io::Error::new(
-                ErrorKind::InvalidInput,
-                format!("Error decoding ChannelEnd: {}", e),
-            )
-        })
     }
 }
 
@@ -406,6 +384,10 @@ impl FromStr for Order {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum State {
     Uninitialized = 0,
