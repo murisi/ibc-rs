@@ -70,21 +70,28 @@ impl BorshSerialize for AnyHeader {
         let vec = self
             .encode_vec()
             .expect("AnyHeader encoding shouldn't fail");
-        writer.write_all(&vec)
+        let bytes = vec
+            .try_to_vec()
+            .expect("AnyHeader bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
     }
 }
 
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for AnyHeader {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        let result = AnyHeader::decode_vec(buf).map_err(|e| {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
-                format!("Error decoding AnyHeader: {}", e),
+                format!("Error decoding AnyHeader from bytes: {}", e),
             )
-        });
-        *buf = &[];
-        result
+        })?;
+        AnyHeader::decode_vec(&vec).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyHeader from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 

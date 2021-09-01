@@ -83,21 +83,28 @@ impl BorshSerialize for AnyConsensusState {
         let vec = self
             .encode_vec()
             .expect("AnyConsensusState encoding shouldn't fail");
-        writer.write_all(&vec)
+        let bytes = vec
+            .try_to_vec()
+            .expect("AnyConsensusState bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
     }
 }
 
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for AnyConsensusState {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        let result = AnyConsensusState::decode_vec(buf).map_err(|e| {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
-                format!("Error decoding AnyConsensusState: {}", e),
+                format!("Error decoding AnyConsensusState from bytes: {}", e),
             )
-        });
-        *buf = &[];
-        result
+        })?;
+        AnyConsensusState::decode_vec(&vec).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyConsensusState from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 

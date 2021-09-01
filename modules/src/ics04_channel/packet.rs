@@ -175,21 +175,28 @@ impl Default for Packet {
 impl BorshSerialize for Packet {
     fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
         let vec = self.encode_vec().expect("Packet encoding shouldn't fail");
-        writer.write_all(&vec)
+        let bytes = vec
+            .try_to_vec()
+            .expect("Packet bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
     }
 }
 
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for Packet {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        let result = Packet::decode_vec(buf).map_err(|e| {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
-                format!("Error decoding Packet: {}", e),
+                format!("Error decoding Packet from bytes: {}", e),
             )
-        });
-        *buf = &[];
-        result
+        })?;
+        Packet::decode_vec(&vec).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding Packet from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 

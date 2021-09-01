@@ -106,21 +106,28 @@ impl BorshSerialize for AnyClientState {
         let vec = self
             .encode_vec()
             .expect("AnyClientState encoding shouldn't fail");
-        writer.write_all(&vec)
+        let bytes = vec
+            .try_to_vec()
+            .expect("AnyClientState bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
     }
 }
 
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for AnyClientState {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        let result = AnyClientState::decode_vec(buf).map_err(|e| {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
-                format!("Error decoding AnyClientState: {}", e),
+                format!("Error decoding AnyClientState from bytes: {}", e),
             )
-        });
-        *buf = &[];
-        result
+        })?;
+        AnyClientState::decode_vec(&vec).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyClientState from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 

@@ -112,21 +112,28 @@ impl BorshSerialize for ConnectionEnd {
         let vec = self
             .encode_vec()
             .expect("ConnectionEnd encoding shouldn't fail");
-        writer.write_all(&vec)
+        let bytes = vec
+            .try_to_vec()
+            .expect("ConnectionEnd bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
     }
 }
 
 #[cfg(feature = "borsh")]
 impl BorshDeserialize for ConnectionEnd {
     fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
-        let result = ConnectionEnd::decode_vec(buf).map_err(|e| {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
             std::io::Error::new(
                 ErrorKind::InvalidInput,
-                format!("Error decoding ConnectionEnd: {}", e),
+                format!("Error decoding ConnectionEnd from bytes: {}", e),
             )
-        });
-        *buf = &[];
-        result
+        })?;
+        ConnectionEnd::decode_vec(&vec).map_err(|e| {
+            std::io::Error::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding ConnectionEnd from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 
