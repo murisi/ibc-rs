@@ -40,15 +40,15 @@ sha2 = { version = "0.9.3", optional = true }
 
 [dependencies.tendermint]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"
 
 [dependencies.tendermint-proto]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"
 
 [dependencies.tendermint-testgen]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"
 optional = true
 
 [dev-dependencies]
@@ -56,8 +56,8 @@ env_logger = "0.8.4"
 tracing-subscriber = "0.2.19"
 test-env-log = { version = "0.2.7", features = ["trace"] }
 modelator = { git = "https://github.com/informalsystems/modelator", rev = "99f656fa8b3cf46a2aa0b6513e4e140d1778c4bd" }
-tendermint-rpc = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "tomas/update-genesis-new-prost", features = ["http-client", "websocket-client"] }
-tendermint-testgen = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "tomas/update-genesis-new-prost" } # Needed for generating (synthetic) light blocks.
+tendermint-rpc = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "tomas/lowercase-node-id", features = ["http-client", "websocket-client"] }
+tendermint-testgen = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "tomas/lowercase-node-id" } # Needed for generating (synthetic) light blocks.
 sha2 = { version = "0.9.3" }
 
 [[test]]

@@ -31,4 +31,4 @@ tonic = "0.5.0"
 
 [dependencies.tendermint-proto]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"

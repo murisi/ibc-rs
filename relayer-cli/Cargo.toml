@@ -51,20 +51,20 @@ signal-hook = "0.3.9"
 
 [dependencies.tendermint-proto]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"
 
 [dependencies.tendermint]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"
 
 [dependencies.tendermint-rpc]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"
 features = ["http-client", "websocket-client"]
 
 [dependencies.tendermint-light-client]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/update-genesis-new-prost"
+branch = "tomas/lowercase-node-id"
 features = ["unstable"]
 
 [dependencies.abscissa_core]
