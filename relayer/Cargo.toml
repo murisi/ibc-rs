@@ -59,21 +59,21 @@ semver = "1.0"
 
 [dependencies.tendermint]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 
 [dependencies.tendermint-rpc]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 features = ["http-client", "websocket-client"]
 
 [dependencies.tendermint-light-client]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 features = ["unstable"]
 
 [dependencies.tendermint-proto]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 
 [dev-dependencies]
 ibc = { version = "0.6.0", path = "../modules", features = ["mocks"] }
@@ -83,4 +83,4 @@ tracing-subscriber = "0.2.19"
 test-env-log = { version = "0.2.7", features = ["trace"] }
 
 # Needed for generating (synthetic) light blocks.
-tendermint-testgen = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "tomas/lowercase-node-id" }
+tendermint-testgen = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "bat/abci++-integration" }

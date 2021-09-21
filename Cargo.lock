@@ -3033,7 +3033,7 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.20.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/lowercase-node-id#ca0bffdde9a3f1597aea3e0faf518de453b72518"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=bat/abci++-integration#814fdaca4562fc33fba4a1ed823cf872243ef0af"
 dependencies = [
  "anomaly",
  "async-trait",
@@ -3064,7 +3064,7 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client"
 version = "0.20.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/lowercase-node-id#ca0bffdde9a3f1597aea3e0faf518de453b72518"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=bat/abci++-integration#814fdaca4562fc33fba4a1ed823cf872243ef0af"
 dependencies = [
  "anomaly",
  "contracts",
@@ -3085,7 +3085,7 @@ dependencies = [
 [[package]]
 name = "tendermint-proto"
 version = "0.20.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/lowercase-node-id#ca0bffdde9a3f1597aea3e0faf518de453b72518"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=bat/abci++-integration#814fdaca4562fc33fba4a1ed823cf872243ef0af"
 dependencies = [
  "anomaly",
  "bytes",
@@ -3103,7 +3103,7 @@ dependencies = [
 [[package]]
 name = "tendermint-rpc"
 version = "0.20.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/lowercase-node-id#ca0bffdde9a3f1597aea3e0faf518de453b72518"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=bat/abci++-integration#814fdaca4562fc33fba4a1ed823cf872243ef0af"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -3133,7 +3133,7 @@ dependencies = [
 [[package]]
 name = "tendermint-testgen"
 version = "0.20.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/lowercase-node-id#ca0bffdde9a3f1597aea3e0faf518de453b72518"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=bat/abci++-integration#814fdaca4562fc33fba4a1ed823cf872243ef0af"
 dependencies = [
  "ed25519-dalek",
  "gumdrop 0.8.0",

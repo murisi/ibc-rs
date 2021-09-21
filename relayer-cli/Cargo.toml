@@ -51,20 +51,20 @@ signal-hook = "0.3.9"
 
 [dependencies.tendermint-proto]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 
 [dependencies.tendermint]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 
 [dependencies.tendermint-rpc]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 features = ["http-client", "websocket-client"]
 
 [dependencies.tendermint-light-client]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/lowercase-node-id"
+branch = "bat/abci++-integration"
 features = ["unstable"]
 
 [dependencies.abscissa_core]
