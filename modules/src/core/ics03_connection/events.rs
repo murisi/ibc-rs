@@ -71,6 +71,10 @@ fn extract_attributes_from_tx(event: &tendermint::abci::Event) -> Result<Attribu
     Ok(attr)
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Attributes {
     pub height: Height,
@@ -136,6 +140,10 @@ impl From<Attributes> for Vec<Tag> {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenInit(Attributes);
 
@@ -176,6 +184,10 @@ impl From<OpenInit> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenTry(Attributes);
 
@@ -216,6 +228,10 @@ impl From<OpenTry> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenAck(Attributes);
 
@@ -256,6 +272,10 @@ impl From<OpenAck> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenConfirm(Attributes);
 

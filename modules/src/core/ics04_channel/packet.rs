@@ -2,7 +2,12 @@ use crate::prelude::*;
 
 use core::str::FromStr;
 
+#[cfg(feature = "borsh")]
+use borsh::maybestd::io::{Error as BorshError, ErrorKind, Write};
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use serde_derive::{Deserialize, Serialize};
+use tendermint_proto::Protobuf;
 
 use ibc_proto::ibc::core::channel::v1::Packet as RawPacket;
 
@@ -54,6 +59,10 @@ impl core::fmt::Display for PacketMsgType {
 }
 
 /// The sequence number of a packet enforces ordering among packets from the same source.
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Deserialize, Serialize, PartialOrd, Ord)]
 pub struct Sequence(u64);
 
@@ -148,6 +157,37 @@ impl core::fmt::Display for Packet {
         )
     }
 }
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for Packet {
+    fn serialize<W: Write>(&self, writer: &mut W) -> Result<(), BorshError> {
+        let vec = self.encode_vec().expect("Packet encoding shouldn't fail");
+        let bytes = vec
+            .try_to_vec()
+            .expect("Packet bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for Packet {
+    fn deserialize(buf: &mut &[u8]) -> Result<Self, BorshError> {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding Packet from bytes: {}", e),
+            )
+        })?;
+        Packet::decode_vec(&vec).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding Packet from Vec<u8>: {}", e),
+            )
+        })
+    }
+}
+
+impl Protobuf<RawPacket> for Packet {}
 
 impl TryFrom<RawPacket> for Packet {
     type Error = Error;

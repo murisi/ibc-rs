@@ -180,6 +180,10 @@ fn extract_packet_and_write_ack_from_tx(
     Ok((packet, write_ack))
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Attributes {
     pub height: Height,
@@ -329,6 +333,10 @@ impl TryFrom<Packet> for Vec<Tag> {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenInit(pub Attributes);
 
@@ -372,6 +380,10 @@ impl From<OpenInit> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenTry(pub Attributes);
 
@@ -415,6 +427,10 @@ impl From<OpenTry> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenAck(pub Attributes);
 
@@ -462,6 +478,10 @@ impl From<OpenAck> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct OpenConfirm(pub Attributes);
 
@@ -505,6 +525,10 @@ impl From<OpenConfirm> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct CloseInit(pub Attributes);
 
@@ -572,6 +596,10 @@ impl core::fmt::Display for CloseInit {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct CloseConfirm(pub Attributes);
 
@@ -609,6 +637,10 @@ impl From<CloseConfirm> for AbciEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct SendPacket {
     pub height: Height,
@@ -674,6 +706,10 @@ impl core::fmt::Display for SendPacket {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct ReceivePacket {
     pub height: Height,
@@ -713,6 +749,10 @@ impl core::fmt::Display for ReceivePacket {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct WriteAcknowledgement {
     pub height: Height,
@@ -778,6 +818,10 @@ impl core::fmt::Display for WriteAcknowledgement {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct AcknowledgePacket {
     pub height: Height,
@@ -823,6 +867,10 @@ impl core::fmt::Display for AcknowledgePacket {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct TimeoutPacket {
     pub height: Height,
@@ -874,6 +922,10 @@ impl core::fmt::Display for TimeoutPacket {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct TimeoutOnClosePacket {
     pub height: Height,

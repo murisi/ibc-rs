@@ -45,6 +45,10 @@ impl From<Vec<u8>> for CommitmentRoot {
 #[derive(Clone, Debug, PartialEq)]
 pub struct CommitmentPath;
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, PartialEq, Eq, Serialize)]
 #[serde(transparent)]
 pub struct CommitmentProofBytes {
@@ -103,6 +107,10 @@ impl TryFrom<CommitmentProofBytes> for RawMerkleProof {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, PartialEq, Eq, Hash, Deserialize, Default)]
 pub struct CommitmentPrefix {
     bytes: Vec<u8>,

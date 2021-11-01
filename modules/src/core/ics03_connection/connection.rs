@@ -4,6 +4,10 @@ use core::str::FromStr;
 use core::time::Duration;
 use core::u64;
 
+#[cfg(feature = "borsh")]
+use borsh::maybestd::io::{Error as BorshError, ErrorKind, Write};
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use serde::{Deserialize, Serialize};
 use tendermint_proto::Protobuf;
 
@@ -99,6 +103,37 @@ impl Default for ConnectionEnd {
             versions: Vec::new(),
             delay_period: ZERO_DURATION,
         }
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for ConnectionEnd {
+    fn serialize<W: Write>(&self, writer: &mut W) -> Result<(), BorshError> {
+        let vec = self
+            .encode_vec()
+            .expect("ConnectionEnd encoding shouldn't fail");
+        let bytes = vec
+            .try_to_vec()
+            .expect("ConnectionEnd bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for ConnectionEnd {
+    fn deserialize(buf: &mut &[u8]) -> Result<Self, BorshError> {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding ConnectionEnd from bytes: {}", e),
+            )
+        })?;
+        ConnectionEnd::decode_vec(&vec).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding ConnectionEnd from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 
@@ -235,6 +270,10 @@ impl ConnectionEnd {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Counterparty {
     client_id: ClientId,
@@ -323,6 +362,10 @@ impl Counterparty {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum State {
     Uninitialized = 0,

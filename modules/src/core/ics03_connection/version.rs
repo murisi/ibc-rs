@@ -7,6 +7,10 @@ use tendermint_proto::Protobuf;
 use crate::core::ics03_connection::error::Error;
 
 /// Stores the identifier and the features supported by a version
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Version {
     /// unique version identifier

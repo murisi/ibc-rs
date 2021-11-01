@@ -206,6 +206,10 @@ impl FromStr for IbcEventType {
 }
 
 /// Events created by the IBC component of a chain, destined for a relayer.
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub enum IbcEvent {
     NewBlock(NewBlock),

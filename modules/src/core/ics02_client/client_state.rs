@@ -1,6 +1,10 @@
 use core::marker::{Send, Sync};
 use core::time::Duration;
 
+#[cfg(feature = "borsh")]
+use borsh::maybestd::io::{Error as BorshError, ErrorKind, Write};
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use prost_types::Any;
 use serde::{Deserialize, Serialize};
 use tendermint_proto::Protobuf;
@@ -101,6 +105,37 @@ impl AnyClientState {
             #[cfg(any(test, feature = "mocks"))]
             AnyClientState::Mock(mock_state) => mock_state.expired(elapsed_since_latest),
         }
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for AnyClientState {
+    fn serialize<W: Write>(&self, writer: &mut W) -> Result<(), BorshError> {
+        let vec = self
+            .encode_vec()
+            .expect("AnyClientState encoding shouldn't fail");
+        let bytes = vec
+            .try_to_vec()
+            .expect("AnyClientState bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for AnyClientState {
+    fn deserialize(buf: &mut &[u8]) -> Result<Self, BorshError> {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyClientState from bytes: {}", e),
+            )
+        })?;
+        AnyClientState::decode_vec(&vec).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyClientState from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 
@@ -226,6 +261,8 @@ impl From<IdentifiedAnyClientState> for IdentifiedClientState {
 #[cfg(test)]
 mod tests {
 
+    #[cfg(feature = "borsh")]
+    use borsh::{BorshDeserialize, BorshSerialize};
     use prost_types::Any;
     use test_env_log::test;
 
@@ -240,5 +277,14 @@ mod tests {
         let raw: Any = tm_client_state.clone().into();
         let tm_client_state_back = AnyClientState::try_from(raw).unwrap();
         assert_eq!(tm_client_state, tm_client_state_back);
+    }
+
+    #[cfg(feature = "borsh")]
+    #[test]
+    fn any_client_state_borsh() {
+        let tm_client_state = get_dummy_tendermint_client_state(get_dummy_tendermint_header());
+        let bytes = tm_client_state.try_to_vec().unwrap();
+        let decoded = AnyClientState::try_from_slice(&bytes[..]).unwrap();
+        assert_eq!(tm_client_state, decoded);
     }
 }

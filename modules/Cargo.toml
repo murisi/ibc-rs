@@ -40,6 +40,7 @@ safe-regex = { version = "0.2.4", default-features = false }
 subtle-encoding = { version = "0.5", default-features = false }
 sha2 = { version = "0.9.8", default-features = false, optional = true }
 flex-error = { version = "0.4.4", default-features = false }
+borsh = { version = "0.9.0", default-features = false, optional = true }
 
 [dependencies.tendermint]
 version = "=0.23.0"
@@ -71,4 +72,4 @@ clap_derive = "=3.0.0-beta.4"
 [[test]]
 name = "mbt"
 path = "tests/mbt.rs"
-required-features = ["mocks"]
+required-features = ["mocks", "borsh"]

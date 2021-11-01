@@ -1,5 +1,9 @@
 use core::ops::Deref;
 
+#[cfg(feature = "borsh")]
+use borsh::maybestd::io::{Error as BorshError, ErrorKind, Write};
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use prost_types::Any;
 use serde_derive::{Deserialize, Serialize};
 use subtle_encoding::hex;
@@ -83,6 +87,37 @@ impl AnyHeader {
     pub fn decode_from_string(s: &str) -> Result<Self, Error> {
         let header_bytes = hex::decode(s).unwrap();
         Protobuf::decode(header_bytes.as_ref()).map_err(Error::invalid_raw_header)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for AnyHeader {
+    fn serialize<W: Write>(&self, writer: &mut W) -> Result<(), BorshError> {
+        let vec = self
+            .encode_vec()
+            .expect("AnyHeader encoding shouldn't fail");
+        let bytes = vec
+            .try_to_vec()
+            .expect("AnyHeader bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for AnyHeader {
+    fn deserialize(buf: &mut &[u8]) -> Result<Self, BorshError> {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyHeader from bytes: {}", e),
+            )
+        })?;
+        AnyHeader::decode_vec(&vec).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyHeader from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 

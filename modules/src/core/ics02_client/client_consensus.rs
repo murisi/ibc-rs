@@ -3,6 +3,10 @@ use crate::prelude::*;
 use core::convert::Infallible;
 use core::marker::{Send, Sync};
 
+#[cfg(feature = "borsh")]
+use borsh::maybestd::io::{Error as BorshError, ErrorKind, Write};
+#[cfg(feature = "borsh")]
+use borsh::{BorshDeserialize, BorshSerialize};
 use chrono::{DateTime, Utc};
 
 use ibc_proto::ibc::core::client::v1::ConsensusStateWithHeight;
@@ -72,6 +76,37 @@ impl AnyConsensusState {
             #[cfg(any(test, feature = "mocks"))]
             AnyConsensusState::Mock(_cs) => ClientType::Mock,
         }
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshSerialize for AnyConsensusState {
+    fn serialize<W: Write>(&self, writer: &mut W) -> Result<(), BorshError> {
+        let vec = self
+            .encode_vec()
+            .expect("AnyConsensusState encoding shouldn't fail");
+        let bytes = vec
+            .try_to_vec()
+            .expect("AnyConsensusState bytes encoding shouldn't fail");
+        writer.write_all(&bytes)
+    }
+}
+
+#[cfg(feature = "borsh")]
+impl BorshDeserialize for AnyConsensusState {
+    fn deserialize(buf: &mut &[u8]) -> Result<Self, BorshError> {
+        let vec: Vec<u8> = BorshDeserialize::deserialize(buf).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyConsensusState from bytes: {}", e),
+            )
+        })?;
+        AnyConsensusState::decode_vec(&vec).map_err(|e| {
+            BorshError::new(
+                ErrorKind::InvalidInput,
+                format!("Error decoding AnyConsensusState from Vec<u8>: {}", e),
+            )
+        })
     }
 }
 

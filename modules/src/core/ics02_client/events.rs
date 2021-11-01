@@ -97,6 +97,10 @@ pub fn extract_header_from_tx(event: &AbciEvent) -> Result<AnyHeader, Error> {
 
 /// NewBlock event signals the committing & execution of a new block.
 // TODO - find a better place for NewBlock
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone, Copy)]
 pub struct NewBlock {
     pub height: Height,
@@ -120,6 +124,10 @@ impl From<NewBlock> for IbcEvent {
     }
 }
 
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Attributes {
     pub height: Height,
@@ -180,6 +188,10 @@ impl core::fmt::Display for Attributes {
 }
 
 /// CreateClient event signals the creation of a new on-chain client (IBC client).
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct CreateClient(pub Attributes);
 
@@ -224,6 +236,10 @@ impl core::fmt::Display for CreateClient {
 }
 
 /// UpdateClient event signals a recent update of an on-chain client (IBC Client).
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct UpdateClient {
     pub common: Attributes,
@@ -291,6 +307,10 @@ impl core::fmt::Display for UpdateClient {
 
 /// ClientMisbehaviour event signals the update of an on-chain client (IBC Client) with evidence of
 /// misbehaviour.
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct ClientMisbehaviour(pub Attributes);
 
@@ -329,6 +349,10 @@ impl From<ClientMisbehaviour> for AbciEvent {
 }
 
 /// Signals a recent upgrade of an on-chain client (IBC Client).
+#[cfg_attr(
+    feature = "borsh",
+    derive(borsh::BorshSerialize, borsh::BorshDeserialize)
+)]
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 pub struct UpgradeClient(pub Attributes);
 
