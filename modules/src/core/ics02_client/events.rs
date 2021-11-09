@@ -101,7 +101,7 @@ pub fn extract_header_from_tx(event: &AbciEvent) -> Result<AnyHeader, Error> {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
+#[derive(Debug, Deserialize, Serialize, Clone, Copy, PartialEq, Eq)]
 pub struct NewBlock {
     pub height: Height,
 }
@@ -192,7 +192,7 @@ impl core::fmt::Display for Attributes {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct CreateClient(pub Attributes);
 
 impl CreateClient {
@@ -240,7 +240,7 @@ impl core::fmt::Display for CreateClient {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct UpdateClient {
     pub common: Attributes,
     pub header: Option<AnyHeader>,
@@ -311,7 +311,7 @@ impl core::fmt::Display for UpdateClient {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct ClientMisbehaviour(pub Attributes);
 
 impl ClientMisbehaviour {

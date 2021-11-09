@@ -337,7 +337,7 @@ impl TryFrom<Packet> for Vec<Tag> {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct OpenInit(pub Attributes);
 
 impl OpenInit {
@@ -384,7 +384,7 @@ impl From<OpenInit> for AbciEvent {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct OpenTry(pub Attributes);
 
 impl OpenTry {
@@ -431,7 +431,7 @@ impl From<OpenTry> for AbciEvent {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct OpenAck(pub Attributes);
 
 impl OpenAck {
@@ -482,7 +482,7 @@ impl From<OpenAck> for AbciEvent {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct OpenConfirm(pub Attributes);
 
 impl OpenConfirm {
@@ -529,7 +529,7 @@ impl From<OpenConfirm> for AbciEvent {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct CloseInit(pub Attributes);
 
 impl CloseInit {
@@ -600,7 +600,7 @@ impl core::fmt::Display for CloseInit {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct CloseConfirm(pub Attributes);
 
 impl CloseConfirm {
@@ -641,7 +641,7 @@ impl From<CloseConfirm> for AbciEvent {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct SendPacket {
     pub height: Height,
     pub packet: Packet,
@@ -710,7 +710,7 @@ impl core::fmt::Display for SendPacket {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct ReceivePacket {
     pub height: Height,
     pub packet: Packet,
@@ -753,7 +753,7 @@ impl core::fmt::Display for ReceivePacket {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct WriteAcknowledgement {
     pub height: Height,
     pub packet: Packet,
@@ -822,7 +822,7 @@ impl core::fmt::Display for WriteAcknowledgement {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct AcknowledgePacket {
     pub height: Height,
     pub packet: Packet,
@@ -871,7 +871,7 @@ impl core::fmt::Display for AcknowledgePacket {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct TimeoutPacket {
     pub height: Height,
     pub packet: Packet,
@@ -926,7 +926,7 @@ impl core::fmt::Display for TimeoutPacket {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 pub struct TimeoutOnClosePacket {
     pub height: Height,
     pub packet: Packet,

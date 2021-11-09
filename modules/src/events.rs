@@ -210,7 +210,7 @@ impl FromStr for IbcEventType {
     feature = "borsh",
     derive(borsh::BorshSerialize, borsh::BorshDeserialize)
 )]
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub enum IbcEvent {
     NewBlock(NewBlock),
 
