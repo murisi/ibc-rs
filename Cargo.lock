@@ -3003,7 +3003,7 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.23.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/rebase_v0.23.0#fc60795115b887db147e88280321acc08592c4b9"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/abci++-v0.23.0#a072e7da5acf4196febf8229cb20b5235aefcbf2"
 dependencies = [
  "async-trait",
  "bytes",
@@ -3033,7 +3033,7 @@ dependencies = [
 [[package]]
 name = "tendermint-config"
 version = "0.23.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/rebase_v0.23.0#fc60795115b887db147e88280321acc08592c4b9"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/abci++-v0.23.0#a072e7da5acf4196febf8229cb20b5235aefcbf2"
 dependencies = [
  "flex-error",
  "serde",
@@ -3046,7 +3046,7 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client"
 version = "0.23.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/rebase_v0.23.0#fc60795115b887db147e88280321acc08592c4b9"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/abci++-v0.23.0#a072e7da5acf4196febf8229cb20b5235aefcbf2"
 dependencies = [
  "chrono",
  "contracts",
@@ -3066,7 +3066,7 @@ dependencies = [
 [[package]]
 name = "tendermint-proto"
 version = "0.23.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/rebase_v0.23.0#fc60795115b887db147e88280321acc08592c4b9"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/abci++-v0.23.0#a072e7da5acf4196febf8229cb20b5235aefcbf2"
 dependencies = [
  "bytes",
  "chrono",
@@ -3083,7 +3083,7 @@ dependencies = [
 [[package]]
 name = "tendermint-rpc"
 version = "0.23.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/rebase_v0.23.0#fc60795115b887db147e88280321acc08592c4b9"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/abci++-v0.23.0#a072e7da5acf4196febf8229cb20b5235aefcbf2"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -3116,7 +3116,7 @@ dependencies = [
 [[package]]
 name = "tendermint-testgen"
 version = "0.23.0"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/rebase_v0.23.0#fc60795115b887db147e88280321acc08592c4b9"
+source = "git+https://github.com/heliaxdev/tendermint-rs?branch=yuji/abci++-v0.23.0#a072e7da5acf4196febf8229cb20b5235aefcbf2"
 dependencies = [
  "chrono",
  "ed25519-dalek",
