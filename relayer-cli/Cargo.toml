@@ -51,20 +51,20 @@ signal-hook = "0.3.9"
 
 [dependencies.tendermint-proto]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "bat/abci++-integration"
+branch = "bat/abcipp-integration"
 
 [dependencies.tendermint]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "bat/abci++-integration"
+branch = "bat/abcipp-integration"
 
 [dependencies.tendermint-rpc]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "bat/abci++-integration"
+branch = "bat/abcipp-integration"
 features = ["http-client", "websocket-client"]
 
 [dependencies.tendermint-light-client]
 git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "bat/abci++-integration"
+branch = "bat/abcipp-integration"
 features = ["unstable"]
 
 [dependencies.abscissa_core]
