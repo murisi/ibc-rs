@@ -17,9 +17,9 @@ exclude = [
 ]
 
 [patch.crates-io]
-tendermint              = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abci++-v0.23.0" }
-tendermint-rpc          = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abci++-v0.23.0" }
-tendermint-proto        = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abci++-v0.23.0" }
-tendermint-light-client = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abci++-v0.23.0" }
-tendermint-testgen      = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abci++-v0.23.0" }
+tendermint              = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abcipp-v0.23.0" }
+tendermint-rpc          = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abcipp-v0.23.0" }
+tendermint-proto        = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abcipp-v0.23.0" }
+tendermint-light-client = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abcipp-v0.23.0" }
+tendermint-testgen      = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/abcipp-v0.23.0" }
 
