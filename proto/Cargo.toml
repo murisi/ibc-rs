@@ -29,4 +29,5 @@ tonic = "0.6"
 getrandom = { version = "0.2", features = ["js"] }
 
 [dependencies.tendermint-proto]
-version = "=0.23.0"
+git = "https://github.com/heliaxdev/tendermint-rs"
+branch = "yuji/rebase_v0.23.0"
