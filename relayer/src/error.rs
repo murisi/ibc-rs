@@ -496,7 +496,11 @@ define_error! {
 
         EmptyQueryAccount
             { address: String }
-            |e| { format!("Query/Account RPC returned an empty account for address: {}", e.address) }
+            |e| { format!("Query/Account RPC returned an empty account for address: {}", e.address) },
+
+        AnomaWallet
+            [ TraceError<anoma_apps::wallet::FindKeyError> ]
+            |_| { "The keypair was not found" },
     }
 }
 
