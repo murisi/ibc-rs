@@ -29,7 +29,8 @@ tonic = { version = "0.6", optional = true, default-features = false }
 serde = { version = "1.0", default-features = false }
 
 [dependencies.tendermint-proto]
-version = "=0.23.5"
+git = "https://github.com/heliaxdev/tendermint-rs"
+branch = "yuji/abcipp-v0.23.5"
 default-features = false
 
 [features]
