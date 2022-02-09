@@ -32,7 +32,7 @@ impl LightClient {
     }
 }
 
-impl super::LightClient<MockChain> for LightClient {
+impl super::LightClient<TmHeader, TmLightBlock> for LightClient {
     fn verify(
         &mut self,
         _trusted: Height,
