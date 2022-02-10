@@ -2468,18 +2468,16 @@ checksum = "71d301d4193d031abdd79ff7e3dd721168a9572ef3fe51a1517aba235bd8f86e"
 
 [[package]]
 name = "safe-proc-macro2"
-version = "1.0.24"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4c9ca0693867c373d726819a6655d3dc4e88028905f1b1e9b9d399a57ea1d83e"
+version = "1.0.36"
+source = "git+https://github.com/informalsystems/safe-regex.git?branch=no-std#e9beb72fdca6036706ddd1a2571c35d4620429b7"
 dependencies = [
  "unicode-xid",
 ]
 
 [[package]]
 name = "safe-quote"
-version = "1.0.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "566c55c34afcf23f8ae1170373f925201163ed0a9fd315274f35eab6d660b56d"
+version = "1.0.15"
+source = "git+https://github.com/informalsystems/safe-regex.git?branch=no-std#e9beb72fdca6036706ddd1a2571c35d4620429b7"
 dependencies = [
  "safe-proc-macro2",
 ]
@@ -2487,8 +2485,7 @@ dependencies = [
 [[package]]
 name = "safe-regex"
 version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "954950893b0d83c719cb5325bf3941bae7b1c6590d923c70f78bdfed101179b5"
+source = "git+https://github.com/informalsystems/safe-regex.git?branch=no-std#e9beb72fdca6036706ddd1a2571c35d4620429b7"
 dependencies = [
  "safe-regex-macro",
 ]
@@ -2496,8 +2493,7 @@ dependencies = [
 [[package]]
 name = "safe-regex-compiler"
 version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "77be88a67af0852122737d6944cf6cf3b493051ac063b074d11d6dc3aaa57047"
+source = "git+https://github.com/informalsystems/safe-regex.git?branch=no-std#e9beb72fdca6036706ddd1a2571c35d4620429b7"
 dependencies = [
  "safe-proc-macro2",
  "safe-quote",
@@ -2506,8 +2502,7 @@ dependencies = [
 [[package]]
 name = "safe-regex-macro"
 version = "0.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9276d04505a852d89fab9b9d5d72b47e84c726b121f4b8b212b44fba990485d"
+source = "git+https://github.com/informalsystems/safe-regex.git?branch=no-std#e9beb72fdca6036706ddd1a2571c35d4620429b7"
 dependencies = [
  "safe-proc-macro2",
  "safe-regex-compiler",
