@@ -29,8 +29,8 @@ tonic = { version = "0.6", optional = true, default-features = false }
 serde = { version = "1.0", default-features = false }
 
 [dependencies.tendermint-proto]
-git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/getrandom-no-js"
+git = "https://github.com/murisi/tendermint-rs"
+branch = "murisi/jsfix"
 default-features = false
 
 [features]

@@ -24,6 +24,7 @@ eyre_tracer = ["flex-error/eyre_tracer"]
 profiling   = ["ibc-relayer/profiling"]
 telemetry   = ["ibc-relayer/telemetry", "ibc-telemetry"]
 rest-server = ["ibc-relayer-rest"]
+js          = ["tendermint-rpc/js", "tendermint-light-client/js", "tendermint-light-client-verifier/js"]
 
 [dependencies]
 ibc              = { version = "0.12.0", path = "../modules", features = ["std", "clock"] }
@@ -58,27 +59,27 @@ flex-error = { version = "0.4.4", default-features = false, features = ["std", "
 signal-hook = "0.3.13"
 
 [dependencies.tendermint-proto]
-git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/getrandom-no-js"
+git = "https://github.com/murisi/tendermint-rs"
+branch = "murisi/jsfix"
 
 [dependencies.tendermint]
-git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/getrandom-no-js"
+git = "https://github.com/murisi/tendermint-rs"
+branch = "murisi/jsfix"
 features = ["secp256k1"]
 
 [dependencies.tendermint-rpc]
-git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/getrandom-no-js"
+git = "https://github.com/murisi/tendermint-rs"
+branch = "murisi/jsfix"
 features = ["http-client", "websocket-client"]
 
 [dependencies.tendermint-light-client]
-git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/getrandom-no-js"
+git = "https://github.com/murisi/tendermint-rs"
+branch = "murisi/jsfix"
 features = ["unstable"]
 
 [dependencies.tendermint-light-client-verifier]
-git = "https://github.com/heliaxdev/tendermint-rs"
-branch = "tomas/getrandom-no-js"
+git = "https://github.com/murisi/tendermint-rs"
+branch = "murisi/jsfix"
 
 [dependencies.abscissa_core]
 version = "=0.6.0"

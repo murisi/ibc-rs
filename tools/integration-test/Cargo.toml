@@ -18,8 +18,8 @@ ibc             = { path = "../../modules" }
 ibc-relayer     = { path = "../../relayer" }
 ibc-relayer-cli = { path = "../../relayer-cli" }
 ibc-proto       = { path = "../../proto" }
-tendermint      = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "tomas/getrandom-no-js" }
-tendermint-rpc  = { git = "https://github.com/heliaxdev/tendermint-rs", branch = "tomas/getrandom-no-js", features = ["http-client", "websocket-client"] }
+tendermint      = { git = "https://github.com/murisi/tendermint-rs", branch = "murisi/jsfix" }
+tendermint-rpc  = { git = "https://github.com/murisi/tendermint-rs", branch = "murisi/jsfix", features = ["http-client", "websocket-client"] }
 
 tokio = { version = "1.0", features = ["full"] }
 tracing = "0.1.31"
@@ -47,6 +47,7 @@ default = []
 example = []
 manual = []
 experimental = []
+js = ["tendermint-rpc/js"]
 
 [[bin]]
 name = "test_setup_with_binary_channel"

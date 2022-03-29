@@ -1017,8 +1017,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
 dependencies = [
  "cfg-if 1.0.0",
+ "js-sys",
  "libc",
  "wasi 0.10.0+wasi-snapshot-preview1",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -2969,7 +2971,7 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.23.5"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/getrandom-no-js#0dbda5e2f13c443911f9e743c1aa4c1b57392b1e"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
 dependencies = [
  "async-trait",
  "bytes",
@@ -2999,7 +3001,7 @@ dependencies = [
 [[package]]
 name = "tendermint-config"
 version = "0.23.5"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/getrandom-no-js#0dbda5e2f13c443911f9e743c1aa4c1b57392b1e"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
 dependencies = [
  "flex-error",
  "serde",
@@ -3012,7 +3014,7 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client"
 version = "0.23.5"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/getrandom-no-js#0dbda5e2f13c443911f9e743c1aa4c1b57392b1e"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
 dependencies = [
  "contracts",
  "crossbeam-channel 0.4.4",
@@ -3033,7 +3035,7 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client-verifier"
 version = "0.23.5"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/getrandom-no-js#0dbda5e2f13c443911f9e743c1aa4c1b57392b1e"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
 dependencies = [
  "derive_more",
  "flex-error",
@@ -3046,7 +3048,7 @@ dependencies = [
 [[package]]
 name = "tendermint-proto"
 version = "0.23.5"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/getrandom-no-js#0dbda5e2f13c443911f9e743c1aa4c1b57392b1e"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
 dependencies = [
  "bytes",
  "flex-error",
@@ -3063,7 +3065,7 @@ dependencies = [
 [[package]]
 name = "tendermint-rpc"
 version = "0.23.5"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/getrandom-no-js#0dbda5e2f13c443911f9e743c1aa4c1b57392b1e"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -3096,7 +3098,7 @@ dependencies = [
 [[package]]
 name = "tendermint-testgen"
 version = "0.23.5"
-source = "git+https://github.com/heliaxdev/tendermint-rs?branch=tomas/getrandom-no-js#0dbda5e2f13c443911f9e743c1aa4c1b57392b1e"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
 dependencies = [
  "ed25519-dalek",
  "gumdrop",
