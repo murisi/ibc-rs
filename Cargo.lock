@@ -2971,7 +2971,7 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.23.5"
-source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#76650620c8ff0db8af3108d0a31268ed353f5ea2"
 dependencies = [
  "async-trait",
  "bytes",
@@ -3001,7 +3001,7 @@ dependencies = [
 [[package]]
 name = "tendermint-config"
 version = "0.23.5"
-source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#76650620c8ff0db8af3108d0a31268ed353f5ea2"
 dependencies = [
  "flex-error",
  "serde",
@@ -3014,7 +3014,7 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client"
 version = "0.23.5"
-source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#76650620c8ff0db8af3108d0a31268ed353f5ea2"
 dependencies = [
  "contracts",
  "crossbeam-channel 0.4.4",
@@ -3035,7 +3035,7 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client-verifier"
 version = "0.23.5"
-source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#76650620c8ff0db8af3108d0a31268ed353f5ea2"
 dependencies = [
  "derive_more",
  "flex-error",
@@ -3048,7 +3048,7 @@ dependencies = [
 [[package]]
 name = "tendermint-proto"
 version = "0.23.5"
-source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#76650620c8ff0db8af3108d0a31268ed353f5ea2"
 dependencies = [
  "bytes",
  "flex-error",
@@ -3065,7 +3065,7 @@ dependencies = [
 [[package]]
 name = "tendermint-rpc"
 version = "0.23.5"
-source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#76650620c8ff0db8af3108d0a31268ed353f5ea2"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -3098,7 +3098,7 @@ dependencies = [
 [[package]]
 name = "tendermint-testgen"
 version = "0.23.5"
-source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#4202ca6150e3ed653a421db1788f0bccf2cf1c4b"
+source = "git+https://github.com/murisi/tendermint-rs?branch=murisi/jsfix#76650620c8ff0db8af3108d0a31268ed353f5ea2"
 dependencies = [
  "ed25519-dalek",
  "gumdrop",
